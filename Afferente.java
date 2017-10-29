@@ -1,5 +1,7 @@
 package classes;
 
+import java.io.Serializable;
+
 /**
  * 
  * @author Vins
@@ -11,14 +13,24 @@ package classes;
  * @class Afferente
  *
  */
-public abstract class Afferente implements Comparable<Afferente> {
+public abstract class Afferente implements Comparable<Afferente>, Serializable {
 
-	static int cont = 0;
+	/**
+	 * static final long variable: serialVersionUID
+	 */
+	private static final long serialVersionUID = 1L;
+	
+	int cont = 0;
 	private int id = 0;
 	private String nome;
 	private String cognome;
 
-	public Afferente(String nome, String cognome) {
+	/**
+	 * 
+	 * @param nome
+	 * @param cognome
+	 */
+	protected Afferente(String nome, String cognome) {
 		id = ++cont;
 		this.nome = nome;
 		this.cognome = cognome;
@@ -54,25 +66,33 @@ public abstract class Afferente implements Comparable<Afferente> {
 
 	@Override
 	public boolean equals(Object obj) {
-		if (this == obj)
-			return true;
-		if (obj == null)
-			return false;
-		if (getClass() != obj.getClass())
-			return false;
-		Afferente other = (Afferente) obj;
-		if (id != other.id)
-			return false;
-		return true;
+		boolean res = true;
+		if (this == obj){
+			res = true;
+		}
+		if (obj == null){
+			res = false;
+		}
+		if (getClass() != obj.getClass()){
+			res = false;
+		}
+		if(obj instanceof Afferente){
+			Afferente other = (Afferente) obj;
+			if (id != other.id)
+				res = false;
+		}
+		return res;
 	}
 
 	@Override
 	public int compareTo(Afferente arg0) {
+		int num = 0;
 		if (this.getCognome().equals(arg0.getCognome())) {
-			return this.getNome().compareTo(arg0.getNome());
+			num = this.getNome().compareTo(arg0.getNome());
 		} else {
-			return this.getCognome().compareTo(arg0.getCognome());
+			num = this.getCognome().compareTo(arg0.getCognome());
 		}
+		return num;
 	}
 
 }
