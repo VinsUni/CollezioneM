@@ -18,12 +18,12 @@ public abstract class Afferente implements Comparable<Afferente>, Serializable {
 	/**
 	 * static final long serialVersionUID
 	 */
-	private static final long serialVersionUID = 123;
+	private static final long serialVersionUID = 1L;
 	/**
 	 * protected int  variable: cont
 	 */
-	protected int cont = 0;
-	private int id = 0;
+	protected transient int cont = 0;
+	private transient int id = 0;
 	private String nome;
 	private String cognome;
 
