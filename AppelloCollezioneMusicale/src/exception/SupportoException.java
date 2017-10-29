@@ -5,6 +5,12 @@ package exception;
  * @author vince
  *
  */
+
+/**
+ * 
+ * @Class SupportoException
+ *
+ */
 public class SupportoException extends Exception {
 
 	/**

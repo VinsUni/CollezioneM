@@ -5,6 +5,12 @@ package exception;
  * @author vince
  *
  */
+
+/**
+ * 
+ * @Class DurataException
+ *
+ */
 public class DurataException extends Exception {
 
 	/**

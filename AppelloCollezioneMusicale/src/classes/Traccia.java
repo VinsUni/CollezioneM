@@ -9,10 +9,16 @@ import exception.DurataException;
  * @author vince
  *
  */
+
+/**
+ * 
+ * @Class Traccia
+ *
+ */
 public class Traccia implements Comparable<Traccia>, Serializable{
 
 	/**
-	 * 
+	 * static final long serialVersionUID
 	 */
 	private static final long serialVersionUID = 1L;
 

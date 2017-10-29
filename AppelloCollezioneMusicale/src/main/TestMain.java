@@ -24,9 +24,19 @@ import exception.TracciaException;
  * @author vince
  *
  */
+
+/**
+ * 
+ * @Class TestMain
+ *
+ */
 public class TestMain {
 
+	/**
+	 * Private TestMain
+	 */
 	private TestMain(){}
+	
 	/**
 	 * Static random variable
 	 */
@@ -72,7 +82,7 @@ public class TestMain {
 				collezione[i] = new Traccia(titoli[rnd.nextInt(tracce)], esecutori[rnd.nextInt(tracce)], durate[rnd.nextInt(tracce)]);
 			}
 		} catch (DurataException e) {
-			e.printStackTrace();
+			e.getMessage();
 		}
 		
 		Album[] albums = new Album[album];
@@ -107,7 +117,7 @@ public class TestMain {
 				}
 			}
 		} catch (SupportoException e) {
-			e.printStackTrace();
+			e.getMessage();
 		}
 		
 		
@@ -126,7 +136,7 @@ public class TestMain {
 					a.addTracce(lista);	
 				}
 		} catch (TracciaException e) {
-			e.printStackTrace();
+			e.getMessage();
 		}
 		
 		System.out.println(albums[0].toString());
@@ -144,18 +154,18 @@ public class TestMain {
 				oos = new ObjectOutputStream(fos);
 				oos.writeObject(albums[0].toString());
 			} catch (IOException e) {
-				e.printStackTrace();
+				e.getMessage();
 			}finally{
 				try {
 					oos.close();
 					fos.close();
 				} catch (IOException e) {
-					e.printStackTrace();
+					e.getMessage();
 				}
 			}
 			
 		} catch (FileNotFoundException e) {
-			e.printStackTrace();
+			e.getMessage();
 		}
 	}
 

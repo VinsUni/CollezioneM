@@ -16,6 +16,12 @@ import exception.TracciaException;
  * @author vince
  *
  */
+
+/**
+ * 
+ * @Class Album
+ *
+ */
 public class Album implements Serializable{
 
 	/**
@@ -161,7 +167,7 @@ public class Album implements Serializable{
 			stringa = "Album [getData()=" + getData() + ", getId()=" + getId() + ", getDurataAlbum()=" + getDurataAlbum()
 					+ "]";
 		} catch (ListaException e) {
-			e.printStackTrace();
+			e.getMessage();
 		}
 		return stringa;
 	}

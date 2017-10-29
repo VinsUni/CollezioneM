@@ -5,6 +5,12 @@ package exception;
  * @author vince
  *
  */
+
+/**
+ * 
+ * @Class TracciaException
+ *
+ */
 public class TracciaException extends Exception {
 
 	/**

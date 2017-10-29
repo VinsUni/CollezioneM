@@ -5,6 +5,12 @@ package exception;
  * @author vince
  *
  */
+
+/**
+ * 
+ * @Class ListaException
+ *
+ */
 public class ListaException extends Exception {
 	
 	/**
