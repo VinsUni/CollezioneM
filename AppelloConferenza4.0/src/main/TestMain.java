@@ -39,9 +39,9 @@ public class TestMain {
 	public static void main(String[] args) {
 
 		Afferente[] afferenti = new Afferente[150];
-		for (int i = 0; i < afferenti.length; i++) {
-			if (i < 30) {
-				try {
+		try{
+			for (int i = 0; i < afferenti.length; i++) {
+				if (i < 30) {
 					switch (rnd.nextInt(3)) {
 					case 0:
 						afferenti[i] = new Strutturato(genRandString(), genRandString(), Grado.Associato);
@@ -52,12 +52,10 @@ public class TestMain {
 					case 2:
 						afferenti[i] = new Strutturato(genRandString(), genRandString(), Grado.Ricercatore);
 						break;
+					default:
+						break;
 					}
-				} catch (GradoException e) {
-					e.getMessage();
-				}
-			} else if (i >= 30 && i < 70) {
-				try {
+				} else if (i >= 30 && i < 70) {
 					switch (rnd.nextInt(2)) {
 					case 0:
 						afferenti[i] = new Dottorando(genRandString(), genRandString(), (rnd.nextInt(3) + 1),
@@ -67,19 +65,19 @@ public class TestMain {
 						afferenti[i] = new Assegnista(genRandString(), genRandString(), (rnd.nextInt(10) + 1),
 								afferenti[rnd.nextInt(30)]);
 						break;
+					default:
+						break;
 					}
-				} catch (ClassException | AnnoException e) {
-					e.getMessage();
-				}
-			} else if (i >= 70) {
-				try {
+				} else if (i >= 70) {
 					afferenti[i] = new Tesista(genRandString(), genRandString(), genRandString(),
 							afferenti[rnd.nextInt(30)], afferenti[(rnd.nextInt(40) + 30)]);
-				} catch (ClassException e) {
-					e.printStackTrace();
 				}
 			}
+		}catch( ClassException | GradoException |AnnoException e) {
+			e.getMessage();
 		}
+		
+		
 
 	}
 

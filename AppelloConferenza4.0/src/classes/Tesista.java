@@ -27,12 +27,8 @@ public class Tesista extends Afferente{
 		}else{
 			throw new ClassException();
 		}
-		if(correlatore instanceof Dottorando){
-			Dottorando d = (Dottorando) correlatore;
-			this.correlatore = d;
-		}else if(correlatore instanceof Assegnista){
-			Assegnista a = (Assegnista) correlatore;
-			this.correlatore = a;
+		if(correlatore instanceof Dottorando || correlatore instanceof Assegnista){
+			this.correlatore = correlatore;
 		}else{
 			throw new ClassException();
 		}
