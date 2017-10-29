@@ -14,14 +14,12 @@ import java.io.Serializable;
  *
  */
 public abstract class Afferente implements Comparable<Afferente>, Serializable {
-
-	/**
-	 * static final long variable: serialVersionUID
-	 */
-	private static final long serialVersionUID = 1L;
 	
-	int cont = 0;
-	private int id = 0;
+	/**
+	 * protected int  variable: cont
+	 */
+	transient protected int cont = 0;
+	transient private int id = 0;
 	private String nome;
 	private String cognome;
 
@@ -36,22 +34,42 @@ public abstract class Afferente implements Comparable<Afferente>, Serializable {
 		this.cognome = cognome;
 	}
 
+	/**
+	 * 
+	 * @return nome
+	 */
 	public String getNome() {
 		return nome;
 	}
 
+	/**
+	 * 
+	 * @param nome
+	 */
 	public void setNome(String nome) {
 		this.nome = nome;
 	}
 
+	/**
+	 * 
+	 * @return cognome
+	 */
 	public String getCognome() {
 		return cognome;
 	}
 
+	/**
+	 * 
+	 * @param cognome
+	 */
 	public void setCognome(String cognome) {
 		this.cognome = cognome;
 	}
 
+	/**
+	 * 
+	 * @return id
+	 */
 	public int getId() {
 		return id;
 	}
@@ -78,8 +96,9 @@ public abstract class Afferente implements Comparable<Afferente>, Serializable {
 		}
 		if(obj instanceof Afferente){
 			Afferente other = (Afferente) obj;
-			if (id != other.id)
+			if (id != other.id){
 				res = false;
+			}
 		}
 		return res;
 	}
