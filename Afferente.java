@@ -16,6 +16,10 @@ import java.io.Serializable;
 public abstract class Afferente implements Comparable<Afferente>, Serializable {
 	
 	/**
+	 * static final long serialVersionUID
+	 */
+	private static final long serialVersionUID = 1L;
+	/**
 	 * protected int  variable: cont
 	 */
 	transient protected int cont = 0;
@@ -74,6 +78,9 @@ public abstract class Afferente implements Comparable<Afferente>, Serializable {
 		return id;
 	}
 	
+	/**
+	 * @Ovverride hashCode
+	 */
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -82,6 +89,9 @@ public abstract class Afferente implements Comparable<Afferente>, Serializable {
 		return result;
 	}
 
+	/**
+	 * @Ovverride equals
+	 */
 	@Override
 	public boolean equals(Object obj) {
 		boolean res = true;
@@ -103,6 +113,9 @@ public abstract class Afferente implements Comparable<Afferente>, Serializable {
 		return res;
 	}
 
+	/**
+	 * @Override compareTo 
+	 */
 	@Override
 	public int compareTo(Afferente arg0) {
 		int num = 0;
