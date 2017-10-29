@@ -2,48 +2,74 @@ package classes;
 
 import java.io.Serializable;
 import java.time.LocalDateTime;
-import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Iterator;
 import java.util.LinkedList;
+import java.util.List;
 
-import exception.ListaVuotaException;
-import exception.SupportoNonValidoException;
-import exception.TracciaEsistenteException;
+import exception.ListaException;
+import exception.SupportoException;
+import exception.TracciaException;
 
+/**
+ * 
+ * @author vince
+ *
+ */
 public class Album implements Serializable{
+
+	/**
+	 * private static final long serialVersionUID
+	 */
+	private static final long serialVersionUID = 1L;
 
 	public enum Supporto{USB, VINILE, CD}
 	
-	private int id = 0;
-	static int cont = 0;
-	private LinkedList<Traccia> listaTracce;
+	private transient int id = 0;
+	
+	/**
+	 * Static variable
+	 */
+	int cont = 0;
+	private List<Traccia> listaTracce;
 	private Supporto supporto;
-	private String titolo, esecutore;
+	private String titolo;
+	private String esecutore;
 	private LocalDateTime data;
 	
-	public Album(Supporto supporto, LocalDateTime data) throws SupportoNonValidoException {
+	/**
+	 * 
+	 * @param supporto
+	 * @param data
+	 * @throws SupportoNonValidoException
+	 */
+	public Album(Supporto supporto, LocalDateTime data) throws SupportoException {
+		this(supporto, "", "", data);
 		if(supporto.equals(Supporto.CD) || supporto.equals(Supporto.USB) || supporto.equals(Supporto.VINILE)){
-			this.supporto = supporto;
-			this.data = data;
+			this.id = ++cont;
 			listaTracce = new LinkedList<>();
 		}else{
-			throw new SupportoNonValidoException();
+			throw new SupportoException();
 		}
 		
 	}
 	
-	public Album(Supporto supporto, String titolo, String esecutore, LocalDateTime data) throws SupportoNonValidoException {
+	public Album(Supporto supporto, String titolo, String esecutore, LocalDateTime data) throws SupportoException {
 		if(supporto.equals(Supporto.CD) || supporto.equals(Supporto.USB) || supporto.equals(Supporto.VINILE)){
 			this.supporto = supporto;
 			this.titolo = titolo;
+			this.id = ++cont;
 			this.esecutore = esecutore;
 			this.data = data;
 			listaTracce = new LinkedList<>();
 		}else{
-			throw new SupportoNonValidoException();
+			throw new SupportoException();
 		}
 		
+	}
+	
+	public void setListaTracce(List<Traccia> listaTracce) {
+		this.listaTracce = listaTracce;
 	}
 
 	public Supporto getSupporto() {
@@ -82,10 +108,10 @@ public class Album implements Serializable{
 		return id;
 	}
 
-	public void addTracce(ArrayList<Traccia> lista) throws TracciaEsistenteException{
+	public void addTracce(List<Traccia> lista) throws TracciaException{
 		for(Traccia t: lista){
 			if(listaTracce.contains(t)){
-				throw new TracciaEsistenteException();
+				throw new TracciaException();
 			}else{
 				listaTracce.add(t);
 			}
@@ -93,28 +119,32 @@ public class Album implements Serializable{
 	}
 	
 	public boolean isPresente(Traccia t){
+		boolean res = false;
 		if(listaTracce.contains(t)){
-			return true;
+			res = true;
 		}else{
-			return false;
+			res = false;
 		}
+		return res;
 	}
 
-	public int getDurataTraccia(Traccia t) throws ListaVuotaException{
+	public int getDurataTraccia(Traccia t) throws ListaException{
+		int durata = 0;
 		if(listaTracce.isEmpty()){
-			throw new ListaVuotaException();
+			throw new ListaException();
 		}else{
 			if(isPresente(t)){
-				return t.getDurata();
+				durata = t.getDurata();
 			}else{
-				return -1;
+				durata = 0;
 			}
 		}
+		return durata;
 	}
 	
-	public int getDurataAlbum() throws ListaVuotaException{
+	public int getDurataAlbum() throws ListaException{
 		if(listaTracce.isEmpty()){
-			throw new ListaVuotaException();
+			throw new ListaException();
 		}else{
 			int totale = 0;
 			for(Traccia t: listaTracce){
@@ -130,8 +160,7 @@ public class Album implements Serializable{
 		try {
 			stringa = "Album [getData()=" + getData() + ", getId()=" + getId() + ", getDurataAlbum()=" + getDurataAlbum()
 					+ "]";
-		} catch (ListaVuotaException e) {
-			// TODO Auto-generated catch block
+		} catch (ListaException e) {
 			e.printStackTrace();
 		}
 		return stringa;
