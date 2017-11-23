@@ -54,30 +54,46 @@ public class Parco {
 		return res;
 	}
 
+	public void entrataA(Veicolo v, int durata) throws IsFullException{
+		if (isFull(postiMoto)) {
+			throw new IsFullException();
+		} else {
+			Posto p = new Posto();
+			p = getPostoLibero(postiMoto);
+			try {
+				p.occupa(v, orologio);
+			} catch (PostoException e) {
+				System.out.println("ERRORE");
+			}
+			p.setDurata(durata);
+			System.out.println("OCCUPATO" + p.toString());
+			tic();
+		}
+	}
+	
+	public void entrataB(Veicolo v, int durata) throws IsFullException{
+		if (isFull(postiAuto)) {
+			throw new IsFullException();
+		} else {
+			Posto p = new Posto();
+			p = getPostoLibero(postiAuto);
+			try {
+				p.occupa(v, orologio);
+			} catch (PostoException e) {
+				System.out.println("ERRORE");
+			}
+			p.setDurata(durata);
+			System.out.println("OCCUPATO! " + p.toString());
+			tic();
+		}
+	}
+	
 	public void entrata(Veicolo v, int durata) throws IsFullException, PostoException {
 		if (durata < orologio) {
 			if (v != null || v instanceof Moto) {
-				if (isFull(postiMoto)) {
-					throw new IsFullException();
-				} else {
-					Posto p = new Posto();
-					p = getPostoLibero(postiMoto);
-					p.occupa(v, orologio);
-					p.setDurata(durata);
-					System.out.println("OCCUPATO" + p.toString());
-					tic();
-				}
+				entrataA(v, durata);
 			} else if (v != null || v instanceof Auto) {
-				if (isFull(postiAuto)) {
-					throw new IsFullException();
-				} else {
-					Posto p = new Posto();
-					p = getPostoLibero(postiAuto);
-					p.occupa(v, orologio);
-					p.setDurata(durata);
-					System.out.println("OCCUPATO! " + p.toString());
-					tic();
-				}
+				entrataB(v, durata);
 			}
 		}
 
@@ -138,6 +154,20 @@ public class Parco {
 		return res;
 	}
 	
+	public void promoSubA(String codice, int sconto){
+		for (Posto p : postiAuto) {
+			if (p.getStato().equals(Stato.OCCUPATO)) {
+				if (codice.charAt(0) == p.getVeicolo().getTarga().charAt((p.getVeicolo().getTarga().length() - 1))
+						&& codice.charAt(1) == p.getVeicolo().getTarga()
+								.charAt((p.getVeicolo().getTarga().length() - 2))) {
+					double costo = 0;
+					costo = p.getCostoTotale();
+					p.setCostoTotale(costo - (costo * sconto / 100));
+				}
+			}
+		}
+	}
+	
 	public void promo(String string, int sconto, String codice) {
 		if (string.equals("Moto")) {
 			for (Posto p : postiMoto) {
@@ -152,17 +182,7 @@ public class Parco {
 				}
 			}
 		} else if (string.equals("Auto")) {
-			for (Posto p : postiAuto) {
-				if (p.getStato().equals(Stato.OCCUPATO)) {
-					if (codice.charAt(0) == p.getVeicolo().getTarga().charAt((p.getVeicolo().getTarga().length() - 1))
-							&& codice.charAt(1) == p.getVeicolo().getTarga()
-									.charAt((p.getVeicolo().getTarga().length() - 2))) {
-						double costo = 0;
-						costo = p.getCostoTotale();
-						p.setCostoTotale(costo - (costo * sconto / 100));
-					}
-				}
-			}
+			promoSubA(codice, sconto);
 		}
 	}
 

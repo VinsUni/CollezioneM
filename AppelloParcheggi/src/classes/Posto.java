@@ -71,10 +71,10 @@ public class Posto implements Comparable<Posto>, Serializable {
 				+ getOraIngresso() + ", getDurata()=" + getDurata() + ", getCostoTotale()="+ getCostoTotale() + "]";
 	}
 
-	public void occupa(Veicolo veicol, int oraIngresso) throws PostoException {
+	public void occupa(Veicolo newV, int orarioIngresso) throws PostoException {
 		if (getStato().equals(Stato.LIBERO)) {
-			this.setVeicolo(veicol);
-			this.setOraIngresso(oraIngresso);
+			this.setVeicolo(newV);
+			this.setOraIngresso(orarioIngresso);
 			this.setStato(Stato.OCCUPATO);
 		} else {
 			throw new PostoException();
