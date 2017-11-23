@@ -1,5 +1,10 @@
 package classes;
 
+/**
+ * 
+ * @class Auto
+ *
+ */
 public class Auto extends Veicolo {
 
 	public Auto(String targa) {

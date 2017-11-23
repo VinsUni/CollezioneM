@@ -1,5 +1,10 @@
 package classes;
 
+/**
+ * 
+ * @class Moto
+ *
+ */
 public class Moto extends Veicolo {
 
 	public Moto(String targa) {

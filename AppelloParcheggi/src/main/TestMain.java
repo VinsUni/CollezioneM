@@ -9,13 +9,18 @@ import classes.Veicolo;
 import exceptions.IsFullException;
 import exceptions.PostoException;
 
+/**
+ * 
+ * @class TestMain
+ *
+ */
 public class TestMain {
 
 	static Random rnd = new Random();
 
 	static String genRandString(int l) {
 		String a = "qwertyuioplkjhgfdsazxcvbnm";
-		char c[] = new char[l];
+		char[] c = new char[l];
 		for (int i = 0; i < c.length; i++) {
 			c[i] = a.charAt(rnd.nextInt(a.length()));
 		}
@@ -24,8 +29,11 @@ public class TestMain {
 
 	public static void main(String[] args) {
 
-		Parco parco = new Parco(99, 50, 50);
-		Veicolo veicoli[] = new Veicolo[80];
+		int orologio = 99;
+		int postiaut = 40;
+		int postimo = 40;
+		Parco parco = new Parco(orologio, postiaut, postimo);
+		Veicolo[] veicoli = new Veicolo[80];
 
 		for (int i = 0; i < 80; i++) {
 			if (i < 40) {
@@ -36,20 +44,25 @@ public class TestMain {
 		}
 		try {
 			for (int i = 0; i < 99; i++) {
-				switch (rnd.nextInt(2)) {
+				int n = rnd.nextInt(2);
+				switch (n) {
 				case 0:
 					double p = rnd.nextDouble();
-					switch (rnd.nextInt(2)) {
+					int n1 = rnd.nextInt(2);
+					switch (n1) {
 					case 0:
+						int num = (rnd.nextInt(40) + 40);
+						int num2 = (rnd.nextInt(10) + 1);
 						if (p < 0.6) {
-							parco.entrata(veicoli[(rnd.nextInt(40) + 40)], (rnd.nextInt(10) + 1));
+							parco.entrata(veicoli[num], num2);
 						} else {
-							parco.entrata(veicoli[(rnd.nextInt(40))], (rnd.nextInt(10) + 1));
+							parco.entrata(veicoli[num], num2);
 						}
 						break;
 					case 1:
+						int numero = (rnd.nextInt(40) + 40);
 						if (p < 0.6) {
-							Moto m = (Moto) veicoli[(rnd.nextInt(40) + 40)];
+							Moto m = (Moto) veicoli[numero];
 							if(parco.isPresente(m)){
 								parco.uscita(m);
 							}else{
@@ -57,8 +70,9 @@ public class TestMain {
 							}
 							
 						} else {
-							parco.uscita(veicoli[rnd.nextInt(40)]);
-							Auto a = (Auto) veicoli[(rnd.nextInt(40) + 40)];
+							int rn = rnd.nextInt(40);
+							parco.uscita(veicoli[rn]);
+							Auto a = (Auto) veicoli[numero];
 							if(parco.isPresente(a)){
 								parco.uscita(a);
 							}else{
@@ -66,19 +80,25 @@ public class TestMain {
 							}
 						}
 						break;
+					default:
+						break;
 					}
 					break;
 				case 1:
+					break;
+				default:
 					break;
 				}
 				parco.stato();
 			}
 		} catch (IsFullException | PostoException e) {
-			System.out.println(e.getMessage());
+			System.out.println("ERRORE");
 		}
 
-		parco.promo("Moto", (rnd.nextInt(20) + 1), genRandString(2));
-		parco.promo("Auto", (rnd.nextInt(20) + 1), genRandString(2));
+		int sconto1 = (rnd.nextInt(20) + 1);
+		int sconto2 = (rnd.nextInt(20) + 1);
+		parco.promo("Moto", sconto1, genRandString(2));
+		parco.promo("Auto", sconto2, genRandString(2));
 
 	}
 

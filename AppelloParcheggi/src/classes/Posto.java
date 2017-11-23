@@ -4,6 +4,11 @@ import java.io.Serializable;
 
 import exceptions.PostoException;
 
+/**
+ * 
+ * @class Posto
+ *
+ */
 public class Posto implements Comparable<Posto>, Serializable {
 
 	public enum Stato {
@@ -66,9 +71,9 @@ public class Posto implements Comparable<Posto>, Serializable {
 				+ getOraIngresso() + ", getDurata()=" + getDurata() + ", getCostoTotale()="+ getCostoTotale() + "]";
 	}
 
-	public void occupa(Veicolo v, int oraIngresso) throws PostoException {
+	public void occupa(Veicolo veicol, int oraIngresso) throws PostoException {
 		if (getStato().equals(Stato.LIBERO)) {
-			this.setVeicolo(v);
+			this.setVeicolo(veicol);
 			this.setOraIngresso(oraIngresso);
 			this.setStato(Stato.OCCUPATO);
 		} else {
@@ -91,4 +96,31 @@ public class Posto implements Comparable<Posto>, Serializable {
 		return this.getDurata() - arg0.getDurata();
 	}
 
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((veicolo == null) ? 0 : veicolo.hashCode());
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Posto other = (Posto) obj;
+		if (veicolo == null) {
+			if (other.veicolo != null)
+				return false;
+		} else if (!veicolo.equals(other.veicolo))
+			return false;
+		return true;
+	}
+
+	
+	
 }

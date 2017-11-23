@@ -7,6 +7,11 @@ import classes.Posto.Stato;
 import exceptions.IsFullException;
 import exceptions.PostoException;
 
+/**
+ * 
+ * @class Parco
+ *
+ */
 public class Parco {
 
 	private List<Posto> postiAuto;
@@ -134,7 +139,7 @@ public class Parco {
 	}
 	
 	public void promo(String string, int sconto, String codice) {
-		if (string == "Moto") {
+		if (string.equals("Moto")) {
 			for (Posto p : postiMoto) {
 				if (p.getStato().equals(Stato.OCCUPATO)) {
 					if (codice.charAt(0) == p.getVeicolo().getTarga().charAt((p.getVeicolo().getTarga().length() - 1))
@@ -146,7 +151,7 @@ public class Parco {
 					}
 				}
 			}
-		} else if (string == "Auto") {
+		} else if (string.equals("Auto")) {
 			for (Posto p : postiAuto) {
 				if (p.getStato().equals(Stato.OCCUPATO)) {
 					if (codice.charAt(0) == p.getVeicolo().getTarga().charAt((p.getVeicolo().getTarga().length() - 1))

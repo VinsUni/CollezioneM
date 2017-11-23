@@ -1,5 +1,10 @@
 package exceptions;
 
+/**
+ * 
+ * @class Exception's class
+ *
+ */
 public class IsFullException extends Exception {
 
 	/**

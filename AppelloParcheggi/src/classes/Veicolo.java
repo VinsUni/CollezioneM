@@ -1,5 +1,16 @@
 package classes;
 
+/**
+ * 
+ * @author vince
+ *
+ */
+
+/**
+ * 
+ * @class Veicolo
+ *
+ */
 public abstract class Veicolo {
 
 	private String targa;
