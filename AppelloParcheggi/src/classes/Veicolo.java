@@ -15,7 +15,10 @@ public abstract class Veicolo {
 
 	private String targa;
 
-	public Veicolo(String targa) {
+	/**
+	 * @constructor
+	 */
+	protected Veicolo(String targa) {
 		this.targa = targa;
 	}
 
@@ -40,18 +43,21 @@ public abstract class Veicolo {
 
 	@Override
 	public boolean equals(Object obj) {
-		if (this == obj)
+		if (this == obj){
 			return true;
-		if (obj == null)
+		}else if (obj == null){
 			return false;
-		if (getClass() != obj.getClass())
+		}else if (getClass() != obj.getClass()){
 			return false;
+		}
 		Veicolo other = (Veicolo) obj;
 		if (targa == null) {
-			if (other.targa != null)
+			if (other.targa != null){
 				return false;
-		} else if (!targa.equals(other.targa))
+			}
+		} else if (!targa.equals(other.targa)){
 			return false;
+		}
 		return true;
 	}
 

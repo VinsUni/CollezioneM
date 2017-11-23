@@ -11,6 +11,11 @@ import exceptions.PostoException;
  */
 public class Posto implements Comparable<Posto>, Serializable {
 
+	/**
+	 * 
+	 */
+	private static final long SERIALVERSIONUID = 1L;
+
 	public enum Stato {
 		LIBERO, OCCUPATO
 	}
@@ -21,6 +26,21 @@ public class Posto implements Comparable<Posto>, Serializable {
 	private int durata;
 	private double costoTotale;
 
+	
+	/**
+	 * @constructor
+	 */
+	public Posto(Veicolo veicolo, Stato stato, int oraIngresso, int durata, double costoTotale) {
+		this.veicolo = veicolo;
+		this.stato = stato;
+		this.oraIngresso = oraIngresso;
+		this.durata = durata;
+		this.costoTotale = costoTotale;
+	}
+
+	/**
+	 * @constructor
+	 */
 	public Posto() {
 		stato = Stato.LIBERO;
 	}
@@ -106,18 +126,21 @@ public class Posto implements Comparable<Posto>, Serializable {
 
 	@Override
 	public boolean equals(Object obj) {
-		if (this == obj)
+		if (this == obj){
 			return true;
-		if (obj == null)
+		}else if (obj == null){
 			return false;
-		if (getClass() != obj.getClass())
+		}else if (getClass() != obj.getClass()){
 			return false;
+		}
 		Posto other = (Posto) obj;
 		if (veicolo == null) {
-			if (other.veicolo != null)
+			if (other.veicolo != null){
 				return false;
-		} else if (!veicolo.equals(other.veicolo))
+			}
+		} else if (!veicolo.equals(other.veicolo)){
 			return false;
+		}
 		return true;
 	}
 

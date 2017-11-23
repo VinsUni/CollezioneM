@@ -18,6 +18,9 @@ public class Parco {
 	private List<Posto> postiMoto;
 	private int orologio;
 
+	/**
+	 * @constructor
+	 */
 	public Parco(int orologio, int maxAuto, int maxMoto) {
 		this.orologio = orologio;
 		postiAuto = new ArrayList<>();
@@ -34,7 +37,7 @@ public class Parco {
 		return orologio;
 	}
 
-	public Posto getPostoLibero(List<Posto> lista) {
+	static Posto getPostoLibero(List<Posto> lista) {
 		Posto posto = new Posto();
 		for (Posto p : lista) {
 			if (p.getStato().equals(Stato.LIBERO)) {
@@ -44,7 +47,7 @@ public class Parco {
 		return posto;
 	}
 
-	public boolean isFull(List<Posto> lista) {
+	static boolean isFull(List<Posto> lista) {
 		boolean res = true;
 		for (Posto p : lista) {
 			if (p.getStato().equals(Stato.LIBERO)) {
@@ -90,9 +93,9 @@ public class Parco {
 	
 	public void entrata(Veicolo v, int durata) throws IsFullException, PostoException {
 		if (durata < orologio) {
-			if (v != null || v instanceof Moto) {
+			if (v != null || v instanceof Motocicletta) {
 				entrataA(v, durata);
-			} else if (v != null || v instanceof Auto) {
+			} else if (v != null || v instanceof Automobile) {
 				entrataB(v, durata);
 			}
 		}
@@ -101,8 +104,8 @@ public class Parco {
 
 	public void uscita(Veicolo v) throws PostoException {
 		Posto posto = new Posto();
-		if (v instanceof Auto) {
-			Auto a = (Auto) v;
+		if (v instanceof Automobile) {
+			Automobile a = (Automobile) v;
 			for (Posto p : postiAuto) {
 				if (p.getVeicolo().equals(a)) {
 					p.setCostoTotale((p.getDurata() * p.getVeicolo().getCosto()));
@@ -113,8 +116,8 @@ public class Parco {
 			System.out.println("Scontrino:" + "\n" + posto.getVeicolo() + "\nOra ingresso: " + posto.getOraIngresso()
 					+ "\nOra uscita: " + orologio + "\nCosto totale: " + (posto.getDurata() * a.getCosto()));
 			tic();
-		} else if (v instanceof Moto) {
-			Moto m = (Moto) v;
+		} else if (v instanceof Motocicletta) {
+			Motocicletta m = (Motocicletta) v;
 			for (Posto p : postiMoto) {
 				if (p.getVeicolo().equals(m)) {
 					p.setCostoTotale((p.getDurata() * p.getVeicolo().getCosto()));
@@ -134,8 +137,8 @@ public class Parco {
 
 	public boolean isPresente(Veicolo v){
 		boolean res = false;
-		if(v instanceof Moto){
-			Moto m = (Moto) v;
+		if(v instanceof Motocicletta){
+			Motocicletta m = (Motocicletta) v;
 			for(Posto p: postiMoto){
 				if(p.getVeicolo().equals(m)){
 					res = true;
@@ -143,8 +146,8 @@ public class Parco {
 					continue;
 				}
 			}
-		}else if(v instanceof Auto){
-			Auto a = (Auto) v;
+		}else if(v instanceof Automobile){
+			Automobile a = (Automobile) v;
 			for(Posto p: postiAuto){
 				if(p.getVeicolo().equals(a)){
 					res = true;

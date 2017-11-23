@@ -2,8 +2,8 @@ package main;
 
 import java.util.Random;
 
-import classes.Auto;
-import classes.Moto;
+import classes.Automobile;
+import classes.Motocicletta;
 import classes.Parco;
 import classes.Veicolo;
 import exceptions.IsFullException;
@@ -16,7 +16,12 @@ import exceptions.PostoException;
  */
 public class TestMain {
 
-	static Random rnd = new Random();
+	private TestMain(){}
+	
+	/**
+	 * @variable
+	 */
+	static final Random rnd = new Random();
 
 	static String genRandString(int l) {
 		String a = "qwertyuioplkjhgfdsazxcvbnm";
@@ -30,9 +35,9 @@ public class TestMain {
 	static void metodoForA(Veicolo[] veicoli) {
 		for (int i = 0; i < 80; i++) {
 			if (i < 40) {
-				veicoli[i] = new Auto(genRandString(7));
+				veicoli[i] = new Automobile(genRandString(7));
 			} else if (i >= 40 && i < 80) {
-				veicoli[i] = new Moto(genRandString(7));
+				veicoli[i] = new Motocicletta(genRandString(7));
 			}
 		}
 	}
@@ -86,14 +91,14 @@ public class TestMain {
 	static void metodoForBInnerB(int numero, Veicolo[] veicoli, Parco parco, double p) {
 		try {
 			if (p < 0.6) {
-				Moto m = (Moto) veicoli[numero];
+				Motocicletta m = (Motocicletta) veicoli[numero];
 				if (parco.isPresente(m)) {
 					parco.uscita(m);
 				}
 			} else {
 				int rn = rnd.nextInt(40);
 				parco.uscita(veicoli[rn]);
-				Auto a = (Auto) veicoli[numero];
+				Automobile a = (Automobile) veicoli[numero];
 				if (parco.isPresente(a)) {
 					parco.uscita(a);
 				}
