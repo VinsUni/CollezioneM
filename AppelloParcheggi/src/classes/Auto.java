@@ -2,7 +2,7 @@ package classes;
 
 /**
  * 
- * @class Auto
+ * @class public Auto
  *
  */
 public class Auto extends Veicolo {
